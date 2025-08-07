@@ -1,0 +1,137 @@
+.add-product{
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 800px;
+    padding: 30px 50px;
+    margin: 20px 30px;
+    border-radius: 6px;
+    background: white;
+}
+
+/* Textarea styles are now handled by the unified input styles above */
+
+.addproduct-itemfield{
+    width: 100%;
+    color: #7b7b7b;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.addproduct-itemfield p {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.addproduct-itemfield input,
+.addproduct-itemfield select,
+.addproduct-itemfield textarea {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #c3c3c3;
+    outline: none;
+    color: #7b7b7b;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.addproduct-itemfield input,
+.addproduct-itemfield select {
+    height: 50px;
+    padding: 0 15px;
+}
+
+.addproduct-itemfield textarea {
+    padding: 15px;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.addproduct-price{
+    display: flex;
+    gap: 20px;
+}
+
+.addproduct-price .addproduct-itemfield {
+    flex: 1;
+}
+
+/* Select styles are now handled by the unified input styles above */
+.add-product-selector{
+    background-color: white;
+    width: 200px;
+}
+
+.addproduct-upload {
+    width: 100%;
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px dashed #c3c3c3;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 200px;
+    height: 150px;
+}
+
+.upload-box:hover {
+    border-color: #6079ff;
+    background-color: #f8f9ff;
+}
+
+.upload-box p {
+    margin-top: 8px;
+    color: #7b7b7b;
+    font-size: 12px;
+    text-align: center;
+}
+
+.addproduct-thumbnail-img{
+    height: 80px;
+    width: 80px;
+    border-radius: 6px;
+    object-fit: contain;
+    margin: 0;
+}
+
+.addproduct-btn{
+    display: block;
+    margin: 20px auto;
+    width: 160px;
+    height: 50px;
+    border-radius: 6px;
+    background: #6079ff;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.addproduct-btn:hover {
+    background: #4c61d8;
+}
+@media(max-width: 800px){
+    .add-product{
+        width: auto;
+        padding: 20px;
+        margin: 10px;
+    }
+    .addproduct-price{
+        flex-direction: column;
+        gap: 0;
+    }
+    .upload-box {
+        width: 100%;
+        max-width: 300px;
+    }
+}
