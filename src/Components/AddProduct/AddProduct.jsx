@@ -1,6 +1,6 @@
 import React from 'react';
 import './AddProduct.css';
-import upload_area from '../../Assets/upload_area.svg';
+import upload_area from '../../assets/upload_area.svg';
 
 const AddProduct = () => {
     const [image, setImage] = React.useState(false);
