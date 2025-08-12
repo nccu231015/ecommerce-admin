@@ -1,212 +1,192 @@
-# 電商網站管理員後台
+# 電商網站專案
 
-這是電商網站的管理員後台系統，使用 React + Vite 構建的現代化管理面板。
+這是一個完整的電子商務網站解決方案，包含前端客戶界面、後端 API 服務和管理員後台三個主要部分。
+
+## 專案架構
+
+```
+Ecommerce Website/
+├── frontend/       # 客戶端網站 (React)
+├── backend/        # API 服務 (Express + MongoDB)
+└── admin/          # 管理員後台 (React + Vite)
+```
+
+## 功能概述
+
+### 🧠 AI 智能搜索 (核心特色)
+- **純語意向量搜索**: 理解自然語言查詢意圖
+- **智能查詢分析**: 使用 GPT-4o 提取關鍵詞和篩選條件
+- **智能搜索分支**: 
+  - 純類別搜索 (女裝、男裝、童裝)
+  - 語意搜索 (黑色外套、約會穿的)
+  - 智能篩選 (價格1000以下的商品)
+- **⭐ LLM 智能推薦**: GPT-4o 分析搜索結果，標記最符合需求的商品
+- **精確匹配**: 點擊搜索建議進行精確匹配
+
+### 前端功能
+- 商品瀏覽和搜尋
+- **🎯 AI 語意搜索頁面** (新增)
+- 商品類別頁面 (男裝、女裝、兒童裝)
+- 商品詳情頁面
+- 購物車功能
+- 用戶註冊和登入
+- 訂單管理
+
+### 後端功能
+- RESTful API
+- **🤖 AI 搜索 API** (新增)
+- **向量化服務** (OpenAI Embeddings)
+- 使用者認證 (JWT)
+- 產品管理 API
+- 購物車數據存儲
+- 圖片上傳服務 (Cloudinary)
+
+### 管理員後台
+- 產品新增和管理
+- **自動向量化**: 新產品上傳時自動生成向量
+- 產品圖片上傳 (Cloudinary)
+- 產品描述、類別、標籤管理
+- 產品下架功能
 
 ## 技術棧
 
-- **React** - 前端框架
-- **Vite** - 構建工具和開發服務器
-- **CSS3** - 樣式設計
-- **Fetch API** - HTTP 請求處理
+### 🧠 AI 搜索技術
+- **OpenAI GPT-4o**: 自然語言查詢分析
+- **OpenAI Embeddings**: text-embedding-ada-002 (1536維)
+- **MongoDB Atlas Vector Search**: 語意向量搜索
+- **Cloudinary**: 雲端圖片存儲和優化
 
-## 主要功能
+### 前端
+- React 19
+- React Router 7
+- Context API (狀態管理)
+- **AISearch 組件**: 智能搜索界面
 
-### 📦 **產品管理**
-- 新增產品
-- 產品列表查看
-- 產品刪除
-- 圖片上傳
-- 產品描述編輯
-- 分類和標籤管理
+### 後端
+- Express.js
+- **MongoDB Atlas**: 雲端資料庫 + 向量搜索
+- **SearchService**: AI 搜索邏輯封裝
+- JWT (認證)
+- Multer (檔案上傳)
 
-### 🖼️ **圖片管理**
-- 產品圖片上傳
-- 圖片預覽
-- 支援多種圖片格式
+### 管理員後台
+- React 19
+- Vite 6 (構建工具)
+- React Router 7
 
-### 📊 **數據管理**
-- 產品數據統計
-- 庫存管理
-- 價格管理
+## 快速開始
 
-## 產品字段
+### 環境設定
 
-管理員可以管理以下產品信息：
+#### 1. 設定環境變數
+在 `backend/` 目錄下創建 `.env` 檔案：
 
-- **基本信息**
-  - 產品名稱
-  - 產品圖片
-  - 產品分類（men, women, kid）
-  - 新價格
-  - 舊價格
-
-- **詳細信息**
-  - 產品描述（支援多行文本）
-  - 產品分類標籤（可多選）
-  - 產品標籤（自定義標籤）
-
-## 頁面結構
-
-```
-src/
-├── Components/
-│   ├── AddProduct/     # 新增產品組件
-│   │   ├── AddProduct.jsx
-│   │   └── AddProduct.css
-│   ├── ListProduct/    # 產品列表組件
-│   │   ├── ListProduct.jsx
-│   │   └── ListProduct.css
-│   ├── Navbar/         # 導航欄
-│   │   ├── Navbar.jsx
-│   │   └── Navbar.css
-│   └── Sidebar/        # 側邊欄
-│       ├── Sidebar.jsx
-│       └── Sidebar.css
-├── Pages/
-│   └── Admin/          # 主要管理頁面
-│       ├── Admin.jsx
-│       └── Admin.css
-└── assets/             # 靜態資源
-```
-
-## 環境變數
-
-創建 `.env` 文件並設置：
-
-```env
-VITE_API_URL=your_backend_api_url
-```
-
-## 本地開發
-
-1. 安裝依賴：
 ```bash
+# OpenAI API (AI 搜索必需)
+OPENAI_API_KEY=sk-your-openai-key
+
+# MongoDB Atlas (向量搜索必需)
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database
+
+# Cloudinary (圖片存儲)
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
+```
+
+#### 2. MongoDB Atlas 向量索引設定
+在 MongoDB Atlas 中創建向量搜索索引：
+- 索引名稱: `vector_index`
+- 詳細設定請參考: [AI_SEARCH_README.md](AI_SEARCH_README.md)
+
+### 本地開發
+
+#### 1. 啟動後端服務
+
+```bash
+cd backend
 npm install
+node index.js
 ```
 
-2. 啟動開發服務器：
+後端服務將在 http://localhost:4000 運行
+
+#### 2. 啟動前端網站
+
 ```bash
+cd frontend
+npm install
+npm start
+```
+
+前端將在 http://localhost:3000 運行
+
+#### 3. 啟動管理員後台
+
+```bash
+cd admin
+npm install
 npm run dev
 ```
 
-3. 應用將在 `http://localhost:5173` 運行
+管理員後台將在 http://localhost:5173 運行
 
-## 構建部署
+## 🔄 資料流程
 
-```bash
-npm run build
-```
+### AI 搜索流程
+1. **用戶** 輸入自然語言查詢 (如: "我要找童裝，價格1000以下")
+2. **GPT-4o** 分析查詢，提取關鍵詞和篩選條件
+3. **系統** 智能判斷搜索類型：
+   - 純類別查詢 → 直接返回該類別所有商品
+   - 描述性查詢 → 語意向量搜索
+4. **MongoDB Atlas** 執行向量搜索，返回相似商品
+5. **⭐ LLM 智能推薦** 分析搜索結果，標記最符合用戶需求的商品
+6. **前端** 顯示搜索結果，推薦商品帶有金色 "⭐ AI 最推薦" 徽章
 
-## 部署到 Vercel
+### 商品管理流程
+1. **管理員** 通過後台添加產品 (名稱、描述、圖片、價格等)
+2. **系統** 自動生成產品向量 (OpenAI Embeddings)
+3. **用戶** 瀏覽商品、使用 AI 搜索、添加到購物車
+4. 購物車數據同步到後端資料庫
 
-### 自動部署
-1. 連接 GitHub repository
-2. 設置環境變數 `VITE_API_URL`
-3. 設置構建命令：`npm run build`
-4. 設置輸出目錄：`dist`
-5. 自動部署
+## 🚀 線上部署
 
-### 手動部署
-```bash
-npm install -g vercel
-vercel
-```
+### Vercel 部署連結
+- **前端**: https://ecommerce-frontend-theta-mauve.vercel.app
+- **後端**: https://ecommerce-backend-indol-xi.vercel.app
+- **管理後台**: https://ecommerce-admin-amber.vercel.app
 
-## 主要組件說明
+### 部署設定
+詳細部署步驟請參考各子目錄的部署說明。
 
-### AddProduct
-- **產品信息輸入**：名稱、分類、價格
-- **圖片上傳**：支援拖拽上傳和點擊選擇
-- **描述編輯**：多行文本輸入，支援中文換行
-- **分類管理**：逗號分隔的分類輸入
-- **標籤管理**：逗號分隔的標籤輸入
-- **表單驗證**：確保必填字段完整
-- **統一樣式**：所有輸入框樣式一致
+## 📋 環境需求
 
-### ListProduct
-- **產品列表展示**：表格形式展示所有產品
-- **產品刪除**：一鍵刪除產品
-- **圖片預覽**：產品圖片縮圖顯示
-- **數據刷新**：實時更新產品列表
+- Node.js 18+
+- **MongoDB Atlas** (向量搜索支援)
+- **OpenAI API Key** (AI 搜索功能)
+- **Cloudinary 帳戶** (圖片存儲)
+- 網路連線 (API 通訊)
 
-### Sidebar
-- **導航菜單**：快速切換不同功能
-- **圖標設計**：直觀的視覺指示
-- **響應式布局**：適應不同屏幕尺寸
+## 📚 詳細文檔
 
-### Navbar
-- **管理員標識**：顯示當前用戶身份
-- **品牌標識**：展示網站 Logo
-- **簡潔設計**：專注於功能性
+- **AI 搜索系統**: [AI_SEARCH_README.md](AI_SEARCH_README.md)
+- **部署指南**: 各子目錄 README
+- **API 文檔**: 後端 API 端點說明
 
-## API 整合
+## 🎯 最新更新
 
-管理員後台與後端 API 的整合包括：
+### v2.1.0 - LLM 智能推薦 (2024年1月)
+- ✨ **新增 LLM 智能推薦標記**：GPT-4o 分析搜索結果，自動標記最符合用戶需求的商品
+- 🎨 **推薦徽章設計**：金色 "⭐ AI 最推薦" 標記，頂部中央顯示不遮擋內容
+- 💡 **推薦理由提示**：懸停顯示 AI 推薦原因，提升用戶體驗
+- 🔧 **視覺優化**：金邊框突出、閃爍動畫、響應式設計
 
-### 產品管理 API
-- `POST /upload` - 圖片上傳
-- `POST /addproduct` - 新增產品
-- `GET /allproduct` - 獲取所有產品
-- `POST /removeproduct` - 刪除產品
+### v2.0.0 - AI 智能搜索 (2024年1月)
+- 🧠 **純語意向量搜索**：理解自然語言查詢意圖
+- 🤖 **智能搜索分支**：純類別、語意搜索、智能篩選
+- 🎯 **精確匹配**：點擊搜索建議功能
 
-### 數據格式
-```javascript
-{
-  name: "產品名稱",
-  image: "圖片URL",
-  category: "men|women|kid",
-  new_price: 價格,
-  old_price: 原價,
-  description: "產品描述",
-  categories: ["分類1", "分類2"],
-  tags: ["標籤1", "標籤2"]
-}
-```
+---
 
-## 特色功能
-
-### 🎨 **統一的表單設計**
-- 所有輸入框統一樣式
-- 一致的邊距和對齊
-- 響應式表單布局
-
-### 📝 **智能文本處理**
-- 自動處理逗號分隔的輸入
-- 去除多餘空格
-- 過濾空值
-
-### 🖼️ **圖片上傳優化**
-- 圖片預覽功能
-- 上傳進度指示
-- 錯誤處理機制
-
-### 📱 **響應式設計**
-- 適應不同屏幕尺寸
-- 移動設備友好
-- 觸控操作優化
-
-## 開發注意事項
-
-- 確保後端 API 服務正常運行
-- 設置正確的 CORS 配置
-- 檢查環境變數配置
-- 測試圖片上傳功能
-- 驗證表單數據完整性
-
-## 安全考慮
-
-- 管理員身份驗證
-- 文件上傳安全檢查
-- 輸入數據驗證
-- XSS 防護
-
-## 瀏覽器支援
-
-- Chrome (推薦)
-- Firefox
-- Safari
-- Edge
-
-## 開發者
-
-專為電商網站設計的現代化管理員後台，提供完整的產品管理功能。
+**最新版本**: v2.1.0  
+**最後更新**: 2024年1月
