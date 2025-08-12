@@ -120,6 +120,90 @@
 .addproduct-btn:hover {
     background: #4c61d8;
 }
+
+.addproduct-btn:disabled,
+.addproduct-btn.submitting {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.addproduct-btn.submitting:hover {
+    background: #ccc;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 狀態顯示 */
+.submit-status {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid;
+    font-weight: 500;
+}
+
+.submit-status.uploading {
+    background: #e3f2fd;
+    border-color: #2196f3;
+    color: #1976d2;
+}
+
+.submit-status.vectorizing {
+    background: #fff3e0;
+    border-color: #ff9800;
+    color: #f57c00;
+}
+
+.submit-status.success {
+    background: #e8f5e8;
+    border-color: #4caf50;
+    color: #2e7d32;
+}
+
+.submit-status.error {
+    background: #ffebee;
+    border-color: #f44336;
+    color: #c62828;
+}
+
+.status-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+.status-message {
+    flex: 1;
+}
+
+.vector-status {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+}
 @media(max-width: 800px){
     .add-product{
         width: auto;

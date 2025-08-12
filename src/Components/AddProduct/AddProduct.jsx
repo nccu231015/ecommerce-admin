@@ -4,6 +4,8 @@ import upload_area from '../../assets/upload_area.svg';
 
 const AddProduct = () => {
     const [image, setImage] = React.useState(false);
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [submitStatus, setSubmitStatus] = React.useState(null);
     const [productDetails, setProductDetails] = React.useState({
         name: '',
         image: '',        
@@ -64,7 +66,33 @@ const AddProduct = () => {
                 body: JSON.stringify(product),
             })
             .then((resp) => resp.json()).then((data) => {
-                data.success?alert("Product added successfully"):alert("Failed")
+                if (data.success) {
+                    setSubmitStatus({ 
+                        type: 'success', 
+                        message: data.message || '商品添加成功！',
+                        hasVector: data.hasVector 
+                    });
+                    
+                    // 清空表單
+                    setProductDetails({
+                        name: '',
+                        image: '',        
+                        category: 'women',
+                        new_price: '',
+                        old_price: '',
+                        description: '',
+                        categories: '',
+                        tags: '',
+                    });
+                    setImage(false);
+                    
+                    // 3秒後清除狀態
+                    setTimeout(() => {
+                        setSubmitStatus(null);
+                    }, 3000);
+                } else {
+                    setSubmitStatus({ type: 'error', message: '商品添加失敗' });
+                }
             })
         }
     };
@@ -114,7 +142,30 @@ const AddProduct = () => {
                 </label>
                 <input onChange={imageHandler} type="file" name='image' id='file-input' hidden />
             </div>
-            <button onClick={Add_Product} className='addproduct-btn'>ADD</button>
+            
+            {/* 狀態顯示 */}
+            {submitStatus && (
+                <div className={`submit-status ${submitStatus.type}`}>
+                    <div className="status-content">
+                        {submitStatus.type === 'uploading' && <div className="loading-spinner"></div>}
+                        {submitStatus.type === 'vectorizing' && <div className="loading-spinner"></div>}
+                        {submitStatus.type === 'success' && <span className="status-icon">✅</span>}
+                        {submitStatus.type === 'error' && <span className="status-icon">❌</span>}
+                        <span className="status-message">{submitStatus.message}</span>
+                        {submitStatus.hasVector && (
+                            <span className="vector-status">🤖 AI搜索已啟用</span>
+                        )}
+                    </div>
+                </div>
+            )}
+            
+            <button 
+                onClick={Add_Product} 
+                className={`addproduct-btn ${isSubmitting ? 'submitting' : ''}`}
+                disabled={isSubmitting}
+            >
+                {isSubmitting ? '處理中...' : 'ADD PRODUCT'}
+            </button>
         </div>
     );
 };
